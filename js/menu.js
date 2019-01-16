@@ -40,7 +40,9 @@
 	function init() {
 		var showMenu = document.getElementById( 'showMenu' ),
 			perspectiveWrapper = document.getElementById( 'perspective' ),
-			container = perspectiveWrapper.querySelector( '.container' ),
+			// Change to your container class, if you already have in your template,
+			// do not forget to replace in css - component.css
+			container = perspectiveWrapper.querySelector( '.container' ), 
 			contentWrapper = container.querySelector( '.wrapper' );
 
 		showMenu.addEventListener( clickevent, function( ev ) {
@@ -61,7 +63,9 @@
 			classie.add(container, 'transform');
 			if( classie.has( perspectiveWrapper, 'animate') ) {
 				var onEndTransFn = function( ev ) {
-					if( support && ( ev.target.className !== 'container' || ev.propertyName.indexOf( 'transform' ) == -1 ) ) return;
+					if( support && 
+						( ! ev.target.classList.contains( 'container' ) // Change to your container class
+						 || ev.propertyName.indexOf( 'transform' ) == -1 ) ) return;
 					this.removeEventListener( transEndEventName, onEndTransFn );
 					classie.remove( perspectiveWrapper, 'modalview' );
 					classie.remove(container, 'transform');
